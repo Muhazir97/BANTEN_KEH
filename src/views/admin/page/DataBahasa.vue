@@ -61,7 +61,7 @@
                     >
                       <i class="material-icons">more_vert</i>
                     </md-button>
-                    <ul class="dropdown-menu dropdown-menu-right" style="z-index: 100;">
+                    <ul class="dropdown-menu dropdown-menu-right">
                       <li style="margin: 20px;">
                           <span style="cursor: pointer;" @click="edit(row.id)"><p>Edit</p></span>
                       </li>
@@ -175,6 +175,7 @@ export default {
       }).onError(function(error) {                    
           if (error.response.status == 404) {
               context.table.data = [];
+              context.notifyVue(error.response.data.message, 'top', 'right', 'danger')
           }
       })
       .call()
@@ -251,10 +252,10 @@ export default {
       api.onSuccess(function(response) {
           context.get();
           context.showDialog = false;
+          context.notifyVue((context.formTitle === 'Add Data') ? 'Data Berhasil di Simpan' : 'Data Berhasil di Update', 'top', 'right', 'info')
       }).onError(function(error) {                    
-          // context.errorMessage = error.response.data;
-      }).onFinish(function() {
-          // context.btnSave.onLoading = false;   
+          context.notifyVue((context.formTitle === 'Add Data') ? 'Data Gagal di Simpan' : 'Data Gagal di Update' , 'top', 'right', 'danger')
+      }).onFinish(function() {   
       })
       .call();
     },
@@ -265,9 +266,20 @@ export default {
 
         Api(context, kamus.delete(id)).onSuccess(function(response) {
             context.get();
+            context.notifyVue(response.data.message, 'top', 'right', 'info')
         }).call();
       }
     },
+    notifyVue(message, verticalAlign, horizontalAlign, type) {
+      var color = Math.floor(Math.random() * 4 + 1);
+      this.$notify({
+        message: message,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    }
   }
 };
 </script>

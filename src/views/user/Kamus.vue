@@ -8,6 +8,7 @@
       <div class="section profile-content">
         <div class="container">
           
+          <!-- CARD -->
           <div class="features box-translite">
             <div class="md-layout">
               <div class="md-layout-item md-size-50 ml-auto md-medium-size-50 md-small-size-50">
@@ -56,15 +57,15 @@
               </div>
               <div class="md-layout-item md-size-50 ml-auto md-medium-size-50 md-small-size-100">
                 <template v-if="image">
-                  <img style="margin-bottom: 50px; margin-top: 30px;" :src="loadImage(image)" class="rounded"/>
+                  <img style="margin-bottom: 50px; margin-top: 30px;" :src="loadImage(image)" width="400" class="rounded"/>
                 </template>
                 <template v-else>
                   
                 </template>
               </div>
             </div>
-
           </div>
+
         </div>
       </div>
     </div>

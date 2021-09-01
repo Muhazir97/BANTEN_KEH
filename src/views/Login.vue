@@ -11,9 +11,9 @@
               
               <p slot="description" class="description">.</p>
               <md-field class="md-form-group" slot="inputs">
-                <md-icon>email</md-icon>
-                <label>Email...</label>
-                <md-input v-model="email" type="email" v-on:keyup.enter="login()"></md-input>
+                <md-icon>person</md-icon>
+                <label>Username...</label>
+                <md-input v-model="username" type="text" v-on:keyup.enter="login()"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
@@ -43,7 +43,7 @@ export default {
   bodyClass: "login-page",
   data() {
     return {
-      email: '',
+      username: '',
       password: '',
     };
   },
@@ -66,9 +66,9 @@ export default {
       //   authAttemp: 'auth/attemp'  
       // }),
     login() {             
-      if (this.email && this.password) {
+      if (this.username && this.password) {
         var formData = new FormData()
-        formData.append('email',  this.email)
+        formData.append('username',  this.username)
         formData.append('password', this.password)
 
         axios.post(config.apiUrl +"auth/login", formData)

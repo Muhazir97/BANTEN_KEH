@@ -11,4 +11,7 @@ export default {
     cardContent() {
         return Service().get('dashboard/card-content');
     },
+    cardQuiz() {
+        return Service().get('dashboard/card-quiz');
+    },
 }

@@ -42,7 +42,7 @@
                         <i class="material-icons">apps</i>
                         <p>Category</p>
                       </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons scroll">
+                      <ul class="dropdown-menu dropdown-menu-right scroll">
                         <li>
                           <router-link :to="{ name: 'List Content', query: { category: 'Serang'}}">
                             <p>Serang</p>
@@ -120,7 +120,7 @@
                 href="#/quis-pengetahuan"
               >
                 <i class="material-icons">quiz</i>
-                <p>Games</p>
+                <p>Quiz</p>
               </md-list-item>
 
               <md-list-item

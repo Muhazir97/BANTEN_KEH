@@ -1,14 +1,15 @@
 <template>
   <div class="content">
     <div class="md-layout">
+
+      <!-- COUNT DATA KAMUS -->
       <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-40"
+        class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
       >
         <stats-card data-background-color="orange">
           <template slot="header">
             <md-icon>library_books</md-icon>
           </template>
-
           <template slot="content">
             <p class="category">Jumlah Data Kamus</p>
             <h3 class="title">
@@ -25,8 +26,10 @@
           </template>
         </stats-card>
       </div>
+
+      <!-- COUNT DATA CONTENT -->
       <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-40"
+        class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
       >
         <stats-card data-background-color="blue">
           <template slot="header">
@@ -46,6 +49,31 @@
           </template>
         </stats-card>
       </div>
+
+      <!-- COUNT DATA QUIZ -->
+      <div
+        class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
+      >
+        <stats-card data-background-color="green">
+          <template slot="header">
+            <md-icon>quiz</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category">Jumlah Data Quiz</p>
+            <h3 class="title">{{ card_quiz.total_data }}</h3>
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>update</md-icon>
+              Last New Data {{ moment(card_quiz.last_update_data).locale('id').format('LL') }}
+            </div>
+          </template>
+        </stats-card>
+      </div>
+
+      <!-- TABLE RANKING -->
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
@@ -113,6 +141,10 @@ export default {
         total_data: '',
         last_update_data: ''
       },
+      card_quiz: {
+        total_data: '',
+        last_update_data: ''
+      },
       contentTerpopuler: [],
       storageUrl : config.storageUrl,
     };
@@ -121,6 +153,7 @@ export default {
     this.get();
     this.cardKamus();
     this.cardContent();
+    this.cardQuiz();
   },
   methods: {
     get(){
@@ -152,6 +185,17 @@ export default {
       }).onError(function(error) {                    
           if (error.response.status == 404) {
               context.card_content = [];
+          }
+      })
+      .call()
+    },
+    cardQuiz(){
+      let context = this;               
+      Api(context, dashboard.cardQuiz()).onSuccess(function(response) {    
+          context.card_quiz = response.data.data;      
+      }).onError(function(error) {                    
+          if (error.response.status == 404) {
+              context.card_quiz = [];
           }
       })
       .call()

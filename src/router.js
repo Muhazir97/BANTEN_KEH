@@ -18,6 +18,7 @@ import Dashboard from "./views/admin/Dashboard.vue";
 import DataContent from "./views/admin/page/DataContent.vue";
 import DataBahasa from "./views/admin/page/DataBahasa.vue";
 import DataAkun from "./views/admin/page/DataAkun.vue";
+import DataQuiz from "./views/admin/page/DataQuiz.vue";
 
 
 Vue.use(Router);
@@ -101,6 +102,11 @@ const vurRouter =  new Router({
           name: "Data Admin",
           component: DataAkun
         },
+        {
+          path: "data-quiz",
+          name: "Data Quis",
+          component: DataQuiz
+        },
       ]
     },
 
@@ -161,15 +167,15 @@ vurRouter.beforeEach((to, from, next) => {
               name: 'Dashboard'
           });
       }
-      // if (to.name != 'Relogin') {
-      //     if (auth.expired) {
-      //         localStorage.removeItem('token');
-      //         localStorage.setItem('authenticated', false)  
-      //         return next({
-      //             name: 'login'
-      //         });
-      //     }
-      // }
+      if (to.name != 'Relogin') {
+          if (auth.expired) {
+              localStorage.removeItem('token');
+              localStorage.setItem('authenticated', false)  
+              return next({
+                  name: 'login'
+              });
+          }
+      }
   }
   next();
 })

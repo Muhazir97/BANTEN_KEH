@@ -114,7 +114,7 @@ export default {
     },
     get(){
       let params = this.$route.query
-      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+      // axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
       axios.get(config.apiUrl +"content/search-by-category", {params} )
       .then(response => {
        this.table.data = response.data.data

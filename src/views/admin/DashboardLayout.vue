@@ -23,6 +23,10 @@
         <md-icon>person</md-icon>
         <p>Data Admin</p>
       </sidebar-link>
+      <sidebar-link to="/data-quiz">
+        <md-icon>quiz</md-icon>
+        <p>Data Quiz</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
