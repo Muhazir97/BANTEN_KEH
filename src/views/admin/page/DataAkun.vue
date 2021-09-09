@@ -40,15 +40,16 @@
                 <md-table-cell>{{row.created_at}}</md-table-cell>
                 <md-table-cell>
                   <div class="md-list-item-content">
-                    <drop-down direction="down" style="position: relative;">
+                    <drop-down direction="down">
                       <md-button
                         slot="title"
                         class="md-button md-button-link md-simple"
                         data-toggle="dropdown"
+                        @click="clickBtRow(i)"
                       >
                         <i class="material-icons">more_vert</i>
                       </md-button>
-                      <ul class="dropdown-menu dropdown-menu-right" >
+                      <ul class="dropdown-menu dropdown-menu-right" :style="btRow == i ? 'position: relative' : null">
                         <li style="margin: 20px;">
                             <span style="cursor: pointer;" @click="edit(row.id)"><p>Edit</p></span>
                         </li>
@@ -128,11 +129,13 @@ export default {
       formTitle: '',
       dataAdmin: {},
       search: '',
+      btRow: '',
       storageUrl : config.storageUrl,
     };
   },
   mounted(){
     this.get();
+    this.btRow = -1;
   },
   methods: {
     get(){
@@ -214,6 +217,9 @@ export default {
             context.notifyVue(response.data.message, 'top', 'right', 'info')
         }).call();
       }
+    },
+    clickBtRow(i){
+      this.btRow = i;
     },
     notifyVue(message, verticalAlign, horizontalAlign, type) {
       var color = Math.floor(Math.random() * 4 + 1);

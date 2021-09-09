@@ -8,7 +8,7 @@
   >
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <router-link :to="'/'"><h3 class="md-title">Banten Keh!</h3></router-link>
+        <router-link :to="'/'"><h3 class="md-title"><b>Banten Keh!</b></h3></router-link>
       </div>
       <div class="md-toolbar-section-end">
         <md-button

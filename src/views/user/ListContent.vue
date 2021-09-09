@@ -79,9 +79,9 @@ export default {
   bodyClass: "landing-page",
   data() {
     return {
-      carousel1: require("@/assets/img/oldbanten.png"),
-      carousel2: require("@/assets/img/badak2.jpg"),
-      carousel3: require("@/assets/img/kota/debus-banten.jpg"),
+      carousel1: require("@/assets/img/baduy.jpg"),
+      carousel2: require("@/assets/img/Beluk.jpg"),
+      carousel3: require("@/assets/img/rudat2.png"),
       moment:moment,
       table: {
         data: []

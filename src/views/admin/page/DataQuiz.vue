@@ -45,23 +45,26 @@
                 <md-table-cell>{{row.created_by}}</md-table-cell>
                 <md-table-cell>{{row.created_at}}</md-table-cell>
                 <md-table-cell>
-                  <drop-down direction="down">
-                    <md-button
-                      slot="title"
-                      class="md-button md-button-link md-simple "
-                      data-toggle="dropdown"
-                    >
-                      <i class="material-icons">more_vert</i>
-                    </md-button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                      <li style="margin: 20px;">
-                          <span style="cursor: pointer;" @click="edit(row.id)"><p>Edit</p></span>
-                      </li>
-                      <li style="margin: 20px;">
-                          <span style="cursor: pointer;" @click="remove(row.id)"><p>Delete</p></span>
-                      </li>
-                    </ul>
-                  </drop-down>
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-simple "
+                        data-toggle="dropdown"
+                        @click="clickBtRow(i)"
+                      >
+                        <i class="material-icons">more_vert</i>
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-menu-right" :style="btRow == i ? 'position: relative' : null">
+                        <li style="margin: 20px;">
+                            <span style="cursor: pointer;" @click="edit(row.id)"><p>Edit</p></span>
+                        </li>
+                        <li style="margin: 20px;">
+                            <span style="cursor: pointer;" @click="remove(row.id)"><p>Delete</p></span>
+                        </li>
+                      </ul>
+                    </drop-down>
+                  </div>
                 </md-table-cell>
               </md-table-row>
             </md-table>
@@ -135,11 +138,13 @@ export default {
       formTitle: '',
       dataQuiz: {},
       search: '',
+      btRow: '',
       storageUrl : config.storageUrl,
     };
   },
   mounted(){
     this.get();
+    this.btRow = -1;
   },
   methods: {
     get(){
@@ -219,6 +224,9 @@ export default {
             context.notifyVue(response.data.message, 'top', 'right', 'info')
         }).call();
       }
+    },
+    clickBtRow(i){
+      this.btRow = i;
     },
     notifyVue(message, verticalAlign, horizontalAlign, type) {
       var color = Math.floor(Math.random() * 4 + 1);
