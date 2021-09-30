@@ -33,7 +33,7 @@ module.exports = {
   //   }
   // },
   
-  publicPath: '/banten_keh_build/',
+  publicPath: '/',
   assetsDir: 'assets',
   outputDir: 'C:/xampp/htdocs/banten_keh_build'
 };

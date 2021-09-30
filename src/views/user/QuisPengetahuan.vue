@@ -41,7 +41,7 @@
               <div v-else-if="result == false" class="text-center">
                 <img style="margin-bottom: -40px; margin-top: -20px" :src="imgFalse" width="400" class="rounded"/> 
                 <span style="color: white; text-shadow: 2px 2px 4px #000000;">
-                  <h3><b> Jawaban Kamu Salah !!!</b></h3>
+                  <h3><b> Jawaban Kamu Salah, Yang benar adalah {{soal.jawaban}}</b></h3>
                 </span>
                 <md-button style="margin-right: 10px" @click="showDialog = false" class="md-dark md-round">Kembali</md-button>
                 <md-button @click="nextPage()" class="md-success md-round">Lompati</md-button>
@@ -103,6 +103,7 @@ export default {
          .then(response => {
           console.log(response.data.data.data)
            this.soal = response.data.data.data.data[0]
+           console.log(response.data.data.data.data[0]);
            this.next_page = response.data.data.data
          })
          .catch(err => {

@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import MaterialKit from "./plugins/material-kit";
 import CKEditor from '@ckeditor/ckeditor5-vue2';
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false;
 
@@ -18,6 +19,13 @@ Vue.mixin({
     return {
       NavbarStore
     };
+  }
+});
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyD6kRgkY6queKr6mB018l-56HTScH2Aq6Q',
+    libraries: 'places',
   }
 });
 

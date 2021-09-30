@@ -27,7 +27,7 @@
               <h5 class="description">
                 Banten adalah sebuah provinsi, wilayah paling barat di Pulau Jawa, Indonesia. Pusat pemerintahannya berada di Kota Serang. Wilayah Banten terletak di antara 5º7'50"-7º1'11" Lintang Selatan dan 105º1'11"-106º7'12" Bujur Timur, berdasarkan Undang-Undang Republik Indonesia Nomor 23 Tahun 2000 luas wilayah Banten adalah 9.160,70 km². Provinsi Banten terdiri dari 4 kota, 4 kabupaten, 154 kecamatan, 262 kelurahan, dan 1.273 desa.
               </h5>
-              <div id="map"></div>
+              <!-- <GoogleMap/><br> -->
             </div>
           </div>
 
@@ -67,35 +67,17 @@
   </div>
 </template>
 
-<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
-<script>
-  function initialize() {
-    var propertiPeta = {
-      center:new google.maps.LatLng(-8.5830695,116.3202515),
-      zoom:14,
-      mapTypeId:google.maps.MapTypeId.ROADMAP
-    };
-    
-    var peta = new google.maps.Map(document.getElementById("map"), propertiPeta);
-    
-    // membuat Marker
-    var marker=new google.maps.Marker({
-        position: new google.maps.LatLng(-8.5830695,116.3202515),
-        map: peta
-    });
-
-  }
-
-  // event jendela di-load  
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script> -->
 <script>
   import config from '@/configs/config';
   import axios from 'axios';
+  import GoogleMap from '@/components/GoogleMap.vue'
   var moment = require('moment');
 
 export default {
   bodyClass: "landing-page",
+  components: {
+    GoogleMap
+  },
   data() {
     return {
       moment:moment,

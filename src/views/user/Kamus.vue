@@ -11,6 +11,7 @@
           <!-- CARD -->
           <div class="features box-translite">
             <div class="md-layout">
+              <!-- BAHASA -->
               <div class="md-layout-item md-size-50 ml-auto md-medium-size-50 md-small-size-50">
                 <md-field>
                   <label for="movies">Bahasa</label>
@@ -20,7 +21,6 @@
                     <md-option value="sunda" @click.native="get()">Sunda (Banten)</md-option>
                   </md-select>
                 </md-field>
-                
               </div>
               <div class="md-layout-item md-size-50 mr-auto md-medium-size-50 md-small-size-50">
                 <md-field>
@@ -34,19 +34,26 @@
               </div>
             </div>
 
+            <!-- KEYWORD -->
             <div class="md-layout" style="margin-top: 50px">
               <div class="md-layout-item md-size-100 ml-auto md-medium-size-100 md-small-size-100">
                 <md-field>
                   <label>Masukkan Kata Kunci</label>
                   <md-textarea v-model="params.keyword" type="text" id="textarea" v-on:keyup="get()"></md-textarea>
                 </md-field>
-                <md-icon @click.native="speechToText()" class="mic-translite">mic</md-icon>
+                <md-icon @click.native="speechToText()" class="mic-translite" :style="bgBtn == true ? 'color: red;' : null">mic</md-icon>
                 <md-icon @click.native="textToSpechKeyword()" class="volume-translite">volume_up</md-icon>
               </div>
               <div class="md-layout-item md-size-5 ml-auto md-medium-size-5 md-small-size-50">
               </div>
             </div>
-            <div class="md-layout" style="margin-top: 50px">
+
+            <!-- OUTPUT -->
+            <div v-if="statusResult === 'Salah'" class="text-center">
+              <h4><b> Maaf Kata Kunci Tidak Di Temukan :( </b></h4>
+              <img :src="uiEmpty" width="300" class="rounded"/>
+            </div>
+            <div class="md-layout" style="margin-top: 50px" v-else-if="statusResult === 'Benar'">
               <div class="md-layout-item md-size-50 ml-auto md-medium-size-50 md-small-size-100">
                 <h3 style="margin-left: 20px;"><b><em>{{ result }}</em></b></h3>
                 <h4>Pemenggalan : <b><em>{{ pemenggalan }}</em></b></h4>
@@ -60,9 +67,11 @@
                   <img style="margin-bottom: 50px; margin-top: 30px;" :src="loadImage(image)" width="400" class="rounded"/>
                 </template>
                 <template v-else>
-                  
                 </template>
               </div>
+            </div>
+            <div v-else>
+              
             </div>
           </div>
 
@@ -89,11 +98,14 @@ export default {
       kalimat_input: '',
       kalimat_output: '',
       image: '',
+      statusResult: '',
+      uiEmpty: require("@/assets/img/empty.png"),
       params: {
         search_input: 'indo',
         search_output: 'jawa',
         keyword: ''
-      }
+      },
+      bgBtn: false,
     };
   },
   props: {
@@ -111,7 +123,7 @@ export default {
     },
   },
   mounted(){
-    this.get();
+    // this.get();
   },
   methods: {
     get(){
@@ -124,9 +136,10 @@ export default {
            this.kalimat_input  = response.data.data[0].kalimat_input
            this.kalimat_output = response.data.data[0].kalimat_output
            this.image          = response.data.data[0].image
+           this.statusResult   = 'Benar';
          })
          .catch(err => {
-           // alert("Terjadi error server")
+           this.statusResult = 'Salah';
          })
     },
     textToSpechKeyword() {
@@ -151,6 +164,8 @@ export default {
         for (var i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
             context.params.keyword = event.results[i][0].transcript;
+            recognition.stop();
+            context.bgBtn = false;
             context.get();
             context.textToSpechKeyword();
             console.log(context.params.keyword);
@@ -164,6 +179,7 @@ export default {
         alert('Silahkan masukan kata...')
         recognition.start();
         recognizing = true;
+        this.bgBtn = true;
       }
     },
     loadImage(image) {
@@ -177,8 +193,6 @@ export default {
 .section {
   padding: 0;
 }
-
-
 
 .mic-translite {
   cursor: pointer;

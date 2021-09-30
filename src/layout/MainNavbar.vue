@@ -109,25 +109,25 @@
                 </a>
               </li>
 
-              <md-list-item
-                href="#/kamus"
-              >
-                <i class="material-icons">translate</i>
-                <p>Kamus</p>
+              <md-list-item>
+                <router-link :to="'/kamus'">
+                  <i class="material-icons">translate</i>
+                  <p>Kamus</p>
+                </router-link>
               </md-list-item>
 
-              <md-list-item
-                href="#/quis-pengetahuan"
-              >
-                <i class="material-icons">quiz</i>
-                <p>Quiz</p>
+              <md-list-item>
+                <router-link :to="'/quis-pengetahuan'">
+                  <i class="material-icons">quiz</i>
+                  <p>Quiz</p>
+                </router-link>
               </md-list-item>
 
-              <md-list-item
-                href="#/login"
-              >
-                <i class="material-icons">account_circle</i>
-                <p>Login</p>
+              <md-list-item>
+                <router-link :to="'/login'">
+                  <i class="material-icons">account_circle</i>
+                  <p>Login</p>
+                </router-link>
               </md-list-item>
 
               <!-- <li class="md-list-item">
